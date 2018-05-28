@@ -1,0 +1,24 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        encrypt.enabled: false
+        git:
+          uri: /home/shiv/undot/configprop
+          searchPaths: auth-service,client-panel,event-api,eureka-service,gateway-service,und-scheduler,zipkin-service,emailsendservice
+          force-pull: true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    region: dekstop
+    service-url:
+        defaultZone:  http://192.168.0.109:8761/eureka

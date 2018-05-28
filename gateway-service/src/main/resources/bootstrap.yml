@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active:
+      default
+  cloud:
+    config:
+      uri: http://nestros.com:8888
+      enabled: true
+      name: gateway-service
+  application:
+    name: gateway-service
+
+zuul:
+  routes:
+    auth-service:
+      path: /auth/**
+      sensitiveHeaders:
+    client-panel:
+      path: /client/**
+      sensitiveHeaders:
+

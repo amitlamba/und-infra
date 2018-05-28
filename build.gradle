@@ -1,0 +1,75 @@
+buildscript {
+    ext.kotlin_version = '1.2.41'
+    ext.spring_boot_version = '2.0.0.RELEASE'
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/libs-snapshot' }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" // Required for Kotlin integration
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
+        classpath('io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE')
+    }
+}
+
+subprojects {
+    apply plugin: 'maven'
+    apply plugin: 'kotlin' // Required for Kotlin integration
+    apply plugin: 'java'
+    apply plugin: "kotlin-spring"
+    // See https://kotlinlang.org/docs/reference/compiler-plugins.html#kotlin-spring-compiler-plugin
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+
+
+
+    ext {
+        kotlinVersion = '1.2.41'
+        springCloudVersion = 'Finchley.RC1'
+
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/libs-snapshot' }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        jcenter()
+    }
+
+
+
+
+
+    dependencies {
+        compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+        compile("org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}")
+        compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
+        compile('org.springframework.cloud:spring-cloud-starter-sleuth')
+        compile('org.springframework.cloud:spring-cloud-starter-zipkin')
+        compile group: 'org.codehaus.janino', name: 'janino', version: '3.0.8'
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
+
+
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+}

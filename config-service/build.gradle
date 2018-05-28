@@ -1,0 +1,15 @@
+
+
+jar {
+    group = 'com.und'
+    baseName = 'config-service'
+    version = '0.1.0'
+}
+
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.cloud:spring-cloud-config-server')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+}

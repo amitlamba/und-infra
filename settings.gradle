@@ -1,0 +1,5 @@
+rootProject.name = 'und-infra'
+include 'config-service'
+include 'eureka-service'
+include 'gateway-service'
+//include 'zipkin-server'

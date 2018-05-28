@@ -1,0 +1,125 @@
+buildscript {
+    ext {
+        kotlinVersion = '1.2.31'
+        springBootVersion = '1.5.10.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+    }
+}
+
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'maven'
+
+
+sourceCompatibility = 1.8
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+
+
+ext {
+    springCloudVersion = 'Edgware.SR3'
+    zipkinVersion = '2.7.0'
+    sleuthZipkingStreamVersion = '1.3.3.RELEASE'
+
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { setUrl( "https://repo.spring.io/libs-snapshot") }
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+    jcenter()
+    mavenLocal()
+}
+
+
+jar {
+    group = 'com.und'
+    baseName = 'zipkin-service'
+    version = '0.1.0'
+}
+
+
+
+dependencies {
+    //compile("org.springframework.cloud:spring-cloud-sleuth-stream:${sleuthZipkingStreamVersion}")
+    compile("org.springframework.cloud:spring-cloud-sleuth-zipkin-stream")
+    compile "org.springframework.cloud:spring-cloud-starter-sleuth"
+    compile "org.springframework.cloud:spring-cloud-stream-binder-kafka"
+    runtime('io.zipkin.java:zipkin-autoconfigure-ui')
+    compile("io.zipkin.java:zipkin-collector-kafka:${zipkinVersion}")
+    compile("io.zipkin.java:zipkin-storage-elasticsearch-http:${zipkinVersion}")
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.cloud:spring-cloud-starter-config')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+    //compile('org.springframework.cloud:spring-cloud-starter-zipkin')
+
+    //compile("org.springframework.cloud:spring-cloud-sleuth-stream:${sleuthZipkingStreamVersion}")
+    //compile("org.springframework.cloud:spring-cloud-sleuth-zipkin-stream:${sleuthZipkingStreamVersion}")
+    //compile("io.zipkin.java:zipkin-server:${zipkinVersion}")
+    //compile("io.zipkin.java:zipkin-autoconfigure-ui:${zipkinVersion}")
+    //compile("io.zipkin.java:zipkin-storage-elasticsearch-http:${zipkinVersion}")
+    //compile("io.zipkin.java:zipkin-collector-kafka:${zipkinVersion}")
+
+    compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+    compile("org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}")
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
+    compile group: 'org.codehaus.janino', name: 'janino', version: '3.0.8'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+
+}
+
+
+
+

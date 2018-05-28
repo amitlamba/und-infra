@@ -1,0 +1,38 @@
+zipkin:
+  collector:
+    kafka:
+      #bootstrap-servers: 192.168.0.1:9092
+      topic: wowTopicZipkin
+
+spring:
+  zipkin:
+    kafka:
+      topic: zipkinCustom
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 192.168.0.109
+          defaultBrokerPort: ${KAFKA_PORT}
+          zkNodes: 192.168.0.109
+          defaultZkPort: 2181
+          #offsetUpdateCount: 1
+          #replicationFactor: 2
+          #minPartitionCount: true
+          #minPartitionCount: 2
+        bindings:
+          zipkinCustom:
+            group: zipkinCustomGroup
+            destination: zipkinCustom
+
+
+
+
+
+  kafka:
+    admin:
+      properties:
+        #security.protocol: SSL
+        client.id: zipkin
+
+
