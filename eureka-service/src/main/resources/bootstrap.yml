@@ -4,8 +4,10 @@ spring:
       default
   cloud:
     config:
-      uri: http://nestros.com:8888
+      uri: http://${CONFIG_IP}:${CONFIG_PORT}
       enabled: true
       name: eureka-service
   application:
     name: eureka-service
+encrypt:
+  key: ${ENCRYPT_KEY}

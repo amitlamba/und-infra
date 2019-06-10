@@ -4,18 +4,11 @@ spring:
       default
   cloud:
     config:
-      uri: http://nestros.com:8888
+      uri: http://${CONFIG_IP}:${CONFIG_PORT}
       enabled: true
       name: gateway-service
   application:
     name: gateway-service
-
-zuul:
-  routes:
-    auth-service:
-      path: /auth/**
-      sensitiveHeaders:
-    client-panel:
-      path: /client/**
-      sensitiveHeaders:
+encrypt:
+  key: ${ENCRYPT_KEY}
 
