@@ -21,7 +21,7 @@ eureka:
     fetch-registry: true
     region: dekstop
     service-url:
-        defaultZone:  http://${EUREKA_IP}:${EUREKA_PORT}/eureka
+        defaultZone:  http://${EUREKA_IP}:${EUREKA_PORT_STAGING}/eureka
 
 encrypt:
   key: ${ENCRYPT_KEY}

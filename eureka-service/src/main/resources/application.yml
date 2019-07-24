@@ -1,1 +1,19 @@
-
+#server:
+#  port: 8771
+#
+#spring:
+#  application:
+#    name: eureka-service
+#
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#    health-check-url-path: /application/health
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+#    region: desktop
+#    service-url:
+#      defaultZone: http://${EUREKA_IP}:${EUREKA_PORT_STAGING}/eureka
+#  server:
+#    wait-time-in-ms-when-sync-empty: 5
